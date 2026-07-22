@@ -1,6 +1,6 @@
 {
   "name": "urldn-link-check",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Scan Markdown and documentation for broken links, redirect chains, insecure HTTP links, and excessively long URLs. Usable as a CLI or a GitHub Action.",
   "keywords": [
     "link-checker",
