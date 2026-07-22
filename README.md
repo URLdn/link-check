@@ -249,6 +249,49 @@ mix of healthy, insecure, long, and broken links) and two GitHub Actions
 workflow files you can copy directly into `.github/workflows/`.
 
 
+# Why use urldn-link-check?
+
+
+- ✅ Broken links (404, 500)
+- ✅ Redirect chains (301, 302)
+- ✅ Insecure HTTP links
+- ✅ Very long URLs
+- ✅ Invalid URL format
+- ✅ Duplicate URLs
+- ✅ Timeout detection
+- ✅ Markdown documentation
+- ✅ README files
+- ✅ Wiki pages
+- ✅ MDX files
+## ✨ Features
+
+| Feature | Supported |
+|----------|:---------:|
+| 🔗 Broken Link Detection (404/500) | ✅ |
+| ↪️ Redirect Chain Detection | ✅ |
+| 🔒 HTTP → HTTPS Detection | ✅ |
+| 📏 Long URL Detection | ✅ |
+| 🔍 Markdown (.md) Support | ✅ |
+| 📚 MDX Support | ✅ |
+| 📖 README Scanning | ✅ |
+| 📄 Documentation Scanning | ✅ |
+| 📊 JSON Report | ✅ |
+| 📝 Markdown Report | ✅ |
+| 💬 Pull Request Comments | ✅ |
+| ⚡ GitHub Action | ✅ |
+| 💻 CLI | ✅ |
+| 🎨 Colored Terminal Output | ✅ |
+| 🚀 Fast Concurrent Scanning | ✅ |
+| ⚙️ Configurable Rules | ✅ |
+| 🧪 TypeScript Support | ✅ |
+| 🌍 Cross Platform | ✅ |
+
+
+# Screenshots
+ ### Terminal output
+![alt text](urldn.png)
+
+
 ## FAQ
 
 **Does this shorten my URLs automatically?**
