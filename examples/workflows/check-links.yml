@@ -1,0 +1,39 @@
+name: Check documentation links
+
+on:
+  pull_request:
+    paths:
+      - '**/*.md'
+      - '**/*.mdx'
+  schedule:
+    # Also catch links that rot over time, even without a PR.
+    - cron: '0 6 * * 1'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check links
+        uses: urldn/link-check@v1
+        with:
+          path: docs
+          fail-on-broken: true
+          fail-on-http: true
+          fail-on-redirect: false
+          max-url-length: 100
+          output: link-check-report.json
+          comment-on-pr: true
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: link-check-report
+          path: link-check-report.json

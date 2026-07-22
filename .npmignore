@@ -1,0 +1,19 @@
+# Source (only dist/ is published, per package.json "files")
+src/
+test/
+
+# Config
+tsconfig.json
+tsup.config.ts
+vitest.config.ts
+.eslintrc*
+.prettierrc*
+
+# CI / repo meta
+.github/
+examples/
+.gitignore
+
+# Coverage / misc
+coverage/
+*.log

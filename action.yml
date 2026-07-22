@@ -1,0 +1,57 @@
+name: 'urldn-link-check'
+description: 'Scan Markdown docs for broken links, redirect chains, insecure HTTP links, and excessively long URLs.'
+author: 'URLDN'
+
+branding:
+  icon: 'link-2'
+  color: 'blue'
+
+inputs:
+  path:
+    description: 'Directory or glob to scan for Markdown/MDX files.'
+    required: false
+    default: 'docs'
+  fail-on-broken:
+    description: 'Fail the workflow if broken links are found.'
+    required: false
+    default: 'true'
+  fail-on-redirect:
+    description: 'Fail the workflow if redirect chains are found.'
+    required: false
+    default: 'false'
+  fail-on-http:
+    description: 'Fail the workflow if insecure http:// links are found.'
+    required: false
+    default: 'false'
+  max-url-length:
+    description: 'Flag URLs longer than this many characters.'
+    required: false
+    default: '80'
+  output:
+    description: 'File path to write the JSON report to. Leave empty to skip writing a file.'
+    required: false
+    default: ''
+  comment-on-pr:
+    description: 'Post (or update) a formatted report as a pull request comment.'
+    required: false
+    default: 'true'
+  github-token:
+    description: 'Token used to comment on pull requests. Defaults to GITHUB_TOKEN.'
+    required: false
+    default: ${{ github.token }}
+
+outputs:
+  broken-links:
+    description: 'Number of broken links found.'
+  redirect-links:
+    description: 'Number of links that redirect.'
+  insecure-links:
+    description: 'Number of insecure http:// links found.'
+  total-links:
+    description: 'Total number of unique links checked.'
+  report-path:
+    description: 'Path to the written JSON report, if `output` was set.'
+
+runs:
+  using: 'node24'
+  main: 'dist/action-entry.js'
