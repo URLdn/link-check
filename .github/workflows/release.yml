@@ -5,17 +5,20 @@ on:
     types: [published]
 
 permissions:
-  contents: read
+  contents: write
   id-token: write
 
 jobs:
   publish:
-    name: Publish to npm
+    name: Publish to npm and update release tag
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # Need full history and the ability to push back to the tag
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -39,7 +42,38 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Publish
+      # Commit dist/ into the release tag so GitHub Actions Marketplace can
+      # resolve `main: dist/action-entry.js` in action.yml.
+      # dist/ is intentionally excluded from normal commits via .gitignore;
+      # this step force-adds it only for the tagged release commit.
+      - name: Commit dist/ to release tag
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Stage dist/ even though it's in .gitignore
+          git add --force dist/
+
+          # Only proceed if there is actually something to commit
+          if git diff --cached --quiet; then
+            echo "dist/ already committed, nothing to do."
+          else
+            TAG="${{ github.ref_name }}"
+
+            # Amend the tagged commit to include dist/, then force-move the tag
+            git commit -m "chore: add dist/ build artifacts for ${TAG} [skip ci]"
+
+            # Delete the existing lightweight/annotated tag locally and remotely,
+            # then re-create it pointing at the new commit
+            git tag -d "${TAG}"
+            git push origin ":refs/tags/${TAG}"
+            git tag "${TAG}"
+            git push origin "${TAG}"
+
+            echo "Tag ${TAG} updated with dist/ build artifacts."
+          fi
+
+      - name: Publish to npm
         run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
