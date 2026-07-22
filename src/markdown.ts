@@ -99,11 +99,7 @@ function recordMatch(
   pushIfNew(links, { url: cleanUrl(url), line: lineIndex + 1, column, label }, seenColumns);
 }
 
-function pushIfNew(
-  links: ExtractedLink[],
-  link: ExtractedLink,
-  seenColumns: Set<number>,
-): void {
+function pushIfNew(links: ExtractedLink[], link: ExtractedLink, seenColumns: Set<number>): void {
   const key = link.column;
   if (seenColumns.has(key)) return;
   seenColumns.add(key);

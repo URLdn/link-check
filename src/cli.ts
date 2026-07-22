@@ -11,7 +11,9 @@ const program = new Command();
 
 program
   .name('urldn-link-check')
-  .description('Scan Markdown files and documentation for broken links, redirect chains, insecure HTTP links, and excessively long URLs.')
+  .description(
+    'Scan Markdown files and documentation for broken links, redirect chains, insecure HTTP links, and excessively long URLs.',
+  )
   .version(packageJson.version)
   .argument('<path>', 'directory or glob to scan for Markdown/MDX files')
   .option('--json', 'print the report as JSON instead of the human-readable format', false)

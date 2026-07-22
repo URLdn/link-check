@@ -1,13 +1,7 @@
 import axios, { type AxiosError } from 'axios';
 import { isInsecureHttp, isValidUrl } from './utils.js';
 
-export type LinkStatus =
-  | 'ok'
-  | 'redirect'
-  | 'broken'
-  | 'timeout'
-  | 'malformed'
-  | 'insecure-http';
+export type LinkStatus = 'ok' | 'redirect' | 'broken' | 'timeout' | 'malformed' | 'insecure-http';
 
 export interface CheckOptions {
   timeout: number;

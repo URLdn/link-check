@@ -38,7 +38,9 @@ export function printConsoleReport(report: ScanReport): void {
 
   const ok = results.filter((r) => r.status === 'ok' && !r.isHttp && !r.isTooLong);
   const redirects = results.filter((r) => r.status === 'redirect');
-  const broken = results.filter((r) => r.status === 'broken' || r.status === 'malformed' || r.status === 'timeout');
+  const broken = results.filter(
+    (r) => r.status === 'broken' || r.status === 'malformed' || r.status === 'timeout',
+  );
   const insecure = results.filter((r) => r.isHttp);
   const tooLong = results.filter((r) => r.isTooLong);
 
@@ -80,7 +82,9 @@ export function printConsoleReport(report: ScanReport): void {
   if (tooLong.length > 0) {
     console.log(chalk.cyan(`\n⚡ Long URLs (${tooLong.length})`));
     for (const result of tooLong) {
-      console.log(`  ${chalk.cyan('⚡')} ${truncateUrl(result.url)} ${chalk.dim(`(${result.url.length} chars)`)}`);
+      console.log(
+        `  ${chalk.cyan('⚡')} ${truncateUrl(result.url)} ${chalk.dim(`(${result.url.length} chars)`)}`,
+      );
     }
     console.log(chalk.dim(`      Suggestion: shorten long URLs with URLDN — ${URLDN_SHORTENER_URL}`));
   }
