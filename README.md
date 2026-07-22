@@ -38,7 +38,6 @@ Summary
 - [Report formats](#report-formats)
 - [Programmatic API](#programmatic-api)
 - [Examples](#examples)
-- [Screenshots](#screenshots)
 - [FAQ](#faq)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
@@ -249,11 +248,6 @@ The [`examples/`](./examples) directory has ready-to-run sample docs (with a
 mix of healthy, insecure, long, and broken links) and two GitHub Actions
 workflow files you can copy directly into `.github/workflows/`.
 
-## Screenshots
-
-> _Add a screenshot of the console report here: `docs/screenshots/console-report.png`_
-
-> _Add a screenshot of the PR comment here: `docs/screenshots/pr-comment.png`_
 
 ## FAQ
 
