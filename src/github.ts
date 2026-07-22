@@ -44,7 +44,7 @@ export async function runAction(): Promise<void> {
     const report = await runScan(config);
     const markdown = toMarkdownReport(report);
 
-    core.summary.addRaw(markdown).write();
+    await core.summary.addRaw(markdown).write();
 
     if (output) {
       await writeJsonReport(report, output);

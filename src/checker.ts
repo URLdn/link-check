@@ -148,12 +148,12 @@ export async function performRequest(url: string, timeout: number): Promise<RawR
       if (response.status === 405 || response.status === 501) {
         response = await client.get(currentUrl);
       }
-    } catch (headError) {
+    } catch {
       response = await client.get(currentUrl);
     }
 
     if (response.status >= 300 && response.status < 400 && response.headers.location) {
-      const nextUrl = new URL(response.headers.location, currentUrl).toString();
+      const nextUrl = new URL(String(response.headers.location), currentUrl).toString();
       redirectChain.push(currentUrl);
       currentUrl = nextUrl;
       continue;
